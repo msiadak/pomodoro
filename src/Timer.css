@@ -1,0 +1,18 @@
+circle {
+  fill: white;
+  stroke: black;
+  stroke-width: 5px;
+  transform: rotate(-0.25turn);
+  transform-origin: 50% 50%;
+}
+
+@keyframes rotate {
+  to {
+    stroke-dashoffset: 251.327412287;
+  }
+}
+
+#progress {
+  stroke: black;
+  stroke-width: 5px;
+}
