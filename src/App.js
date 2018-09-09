@@ -63,11 +63,18 @@ class App extends Component {
   }
 
   handlePauseClick() {
-    clearInterval(this.state.intervalID);
-    this.setState(state => ({
-      paused: true,
-      intervalID: null,
-    }));
+    this.setState(({ paused, intervalID }) => {
+      if (paused) {
+        intervalID = setInterval(this.countDown, 1000);
+      } else {
+        clearInterval(intervalID);
+        intervalID = null;
+      }
+      return {
+        paused: !paused,
+        intervalID: intervalID,
+      };
+    });
   }
 
   handleCancelClick() {
@@ -83,7 +90,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <Timer
           timeLeft={this.state.timeLeft}
           startTime={this.state.startTime}
@@ -91,13 +98,7 @@ class App extends Component {
 
         {this.state.mode !== 'stopped' ? (
           <Fragment>
-            <button
-              onClick={() => {
-                this.handlePauseClick();
-              }}
-            >
-              Pause
-            </button>
+            <button onClick={this.handlePauseClick}>Pause</button>
             <button
               onClick={() => {
                 this.handleCancelClick();

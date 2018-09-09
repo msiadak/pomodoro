@@ -1,6 +1,8 @@
 import React from 'react';
 import './Timer.css';
 
+import ProgressCircle from './ProgressCircle';
+
 function formatTime(ms) {
   const minutes = Math.floor(ms / 60);
   const seconds = ms % 60;
@@ -11,21 +13,13 @@ function formatTime(ms) {
 }
 
 const Timer = ({ startTime, timeLeft }) => {
-  const circumference = 2 * 40 * Math.PI;
   return (
-    <div style={{ width: '100px', height: '100px' }}>
-      <span>{formatTime(timeLeft)}</span>
-      <svg viewBox="0 0 100 100" width="80%" height="80%">
-        <circle
-          className="timer__circle"
-          cx="50"
-          cy="50"
-          r="40"
-          strokeDasharray={circumference}
-          strokeDashoffset={`${(timeLeft / startTime) * circumference +
-            circumference}%`}
-        />
-      </svg>
+    <div className="timer">
+      <ProgressCircle
+        className="timer__progress-circle"
+        progress={timeLeft / startTime}
+      />
+      <span className="timer__span">{formatTime(timeLeft)}</span>
     </div>
   );
 };
