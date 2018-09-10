@@ -1,7 +1,7 @@
 import React from 'react';
 import './ProgressCircle.css';
 
-const ProgressCircle = ({ progress, className }) => {
+const ProgressCircle = ({ progress, className, mode }) => {
   const classes = `${className} progress-circle`;
   return (
     <svg
@@ -10,14 +10,15 @@ const ProgressCircle = ({ progress, className }) => {
       preserveAspectRatio="xMidYMid meet"
     >
       <circle
+        className={`progress-circle__circle--${mode}`}
         cx="60"
         cy="60"
         r="54"
         fill="none"
-        stroke="#f77a22"
         strokeWidth="12"
       />
       <circle
+        className="progress-circle__circle--gray"
         cx="60"
         cy="60"
         r="54"

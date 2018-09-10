@@ -12,14 +12,16 @@ export function formatTime(ms) {
   }`;
 }
 
-const Timer = ({ startTime, timeLeft }) => {
+const Timer = ({ startTime, timeLeft, mode }) => {
   return (
     <div className="timer">
       <ProgressCircle
         className="timer__progress-circle"
         progress={timeLeft / startTime}
+        mode={mode}
       />
-      <span className="timer__span">{formatTime(timeLeft)}</span>
+      <div className="timer__timeleft">{formatTime(timeLeft)}</div>
+      <div className={`timer__modetext timer__modetext--${mode}`}>{mode}</div>
     </div>
   );
 };

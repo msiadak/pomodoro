@@ -1,3 +1,15 @@
 .progress-circle {
   transform: rotate(-0.25turn);
 }
+
+.progress-circle__circle--workSession {
+  stroke: var(--color-worksession);
+}
+
+.progress-circle__circle--shortBreak {
+  stroke: var(--color-shortbreak);
+}
+
+.progress-circle__circle--longBreak {
+  stroke: var(--color-longbreak);
+}

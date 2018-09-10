@@ -1,7 +1,34 @@
 .app {
+  --color-worksession: #68266f;
+  --color-shortbreak: #aa9e39;
+  --color-longbreak: #554c00;
+
   text-align: center;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.buttons__button {
+  background-color: #3a3a3a;
+  color: #e3e3e3;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin: 0.25rem 1rem;
+  box-shadow: 0.125rem 0.125rem rgba(25, 25, 25, 0.1);
+}
+
+.buttons__button--worksession {
+  background-color: var(--color-worksession);
+}
+
+.buttons__button--shortbreak {
+  background-color: var(--color-shortbreak);
+}
+
+.buttons__button--longbreak {
+  background-color: var(--color-longbreak);
 }

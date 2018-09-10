@@ -4,6 +4,7 @@
   padding: 10px;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -16,6 +17,22 @@
   bottom: 0;
 }
 
-.timer__span {
+.timer__timeleft {
   font-size: 20pt;
+}
+
+.timer__modetext {
+  font-size: 20pt;
+}
+
+.timer__modetext--workSession {
+  color: var(--color-worksession);
+}
+
+.timer__modetext--shortBreak {
+  color: var(--color-shortbreak);
+}
+
+.timer__modetext--longBreak {
+  color: var(--color-longbreak);
 }

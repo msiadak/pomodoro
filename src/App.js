@@ -12,6 +12,11 @@ class App extends Component {
       paused: false,
       timeLeft: null,
       intervalID: null,
+      settings: {
+        workSessionLength: 25,
+        shortBreakLength: 5,
+        longBreakLength: 15,
+      },
     };
 
     this.handleStartClick = this.handleStartClick.bind(this);
@@ -23,14 +28,14 @@ class App extends Component {
   handleStartClick = mode => {
     let timeLeft;
     switch (mode) {
-      case 'pomodoro':
-        timeLeft = 25 * 60;
+      case 'workSession':
+        timeLeft = this.state.settings.workSessionLength * 60;
         break;
       case 'shortBreak':
-        timeLeft = 5 * 60;
+        timeLeft = this.state.settings.shortBreakLength * 60;
         break;
       case 'longBreak':
-        timeLeft = 15 * 60;
+        timeLeft = this.state.settings.longBreakLength * 60;
         break;
       default:
         throw new Error(`Invalid mode passed to handleStartClick: ${mode}`);
@@ -93,49 +98,53 @@ class App extends Component {
   }
 
   render() {
+    const buttons =
+      this.state.mode === 'stopped' ? (
+        <Fragment>
+          <button
+            className="buttons__button buttons__button--worksession"
+            onClick={() => {
+              this.handleStartClick('workSession');
+            }}
+          >
+            Work Session
+          </button>
+          <button
+            className="buttons__button buttons__button--shortbreak"
+            onClick={() => {
+              this.handleStartClick('shortBreak');
+            }}
+          >
+            Short Break
+          </button>
+          <button
+            className="buttons__button buttons__button--longbreak"
+            onClick={() => {
+              this.handleStartClick('longBreak');
+            }}
+          >
+            Long Break
+          </button>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <button className="buttons__button" onClick={this.handlePauseClick}>
+            Pause
+          </button>
+          <button className="buttons__button" onClick={this.handleCancelClick}>
+            Cancel
+          </button>
+        </Fragment>
+      );
+
     return (
       <div className="app">
         <Timer
           timeLeft={this.state.timeLeft}
           startTime={this.state.startTime}
+          mode={this.state.mode}
         />
-
-        {this.state.mode !== 'stopped' ? (
-          <Fragment>
-            <button onClick={this.handlePauseClick}>Pause</button>
-            <button
-              onClick={() => {
-                this.handleCancelClick();
-              }}
-            >
-              Cancel
-            </button>
-          </Fragment>
-        ) : (
-          <Fragment>
-            <button
-              onClick={() => {
-                this.handleStartClick('pomodoro');
-              }}
-            >
-              Start Pomodoro
-            </button>
-            <button
-              onClick={() => {
-                this.handleStartClick('shortBreak');
-              }}
-            >
-              Start Short Break
-            </button>
-            <button
-              onClick={() => {
-                this.handleStartClick('longBreak');
-              }}
-            >
-              Start Long Break
-            </button>
-          </Fragment>
-        )}
+        <div className="buttons">{buttons}</div>
       </div>
     );
   }
