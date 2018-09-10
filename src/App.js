@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 
-import Timer from './Timer';
+import Timer, { formatTime } from './Timer';
 
 class App extends Component {
   constructor() {
@@ -20,7 +20,7 @@ class App extends Component {
     this.handleCancelClick = this.handleCancelClick.bind(this);
   }
 
-  handleStartClick(mode) {
+  handleStartClick = mode => {
     let timeLeft;
     switch (mode) {
       case 'pomodoro':
@@ -43,9 +43,9 @@ class App extends Component {
       startTime: timeLeft,
       intervalID: setInterval(this.countDown, 1000),
     });
-  }
+  };
 
-  countDown() {
+  countDown = () => {
     this.setState(state => {
       const timeLeft = state.timeLeft - 1;
       let intervalID = state.intervalID;
@@ -60,9 +60,9 @@ class App extends Component {
         intervalID,
       };
     });
-  }
+  };
 
-  handlePauseClick() {
+  handlePauseClick = () => {
     this.setState(({ paused, intervalID }) => {
       if (paused) {
         intervalID = setInterval(this.countDown, 1000);
@@ -75,9 +75,9 @@ class App extends Component {
         intervalID: intervalID,
       };
     });
-  }
+  };
 
-  handleCancelClick() {
+  handleCancelClick = () => {
     if (this.state.intervalID) {
       clearInterval(this.state.intervalID);
     }
@@ -86,6 +86,10 @@ class App extends Component {
       timeLeft: null,
       intervalID: null,
     });
+  };
+
+  componentDidUpdate() {
+    document.title = `${this.state.mode} - ${formatTime(this.state.timeLeft)}`;
   }
 
   render() {

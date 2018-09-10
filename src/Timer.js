@@ -3,7 +3,7 @@ import './Timer.css';
 
 import ProgressCircle from './ProgressCircle';
 
-function formatTime(ms) {
+export function formatTime(ms) {
   const minutes = Math.floor(ms / 60);
   const seconds = ms % 60;
 
